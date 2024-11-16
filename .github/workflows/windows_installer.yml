@@ -2,57 +2,58 @@ name: Fracktory Windows Installer Local Runner
 run-name: 5.8.0 for Windows-${{ inputs.architecture }} by @${{ github.actor }}
 
 on:
-  workflow_dispatch:
-    inputs:
-      installer_name:
-        description: 'Name of the .exe and .msi'
-        default: 'Fracktory_setup'
-        required: False
-        type: string
-
-      app_name:
-        description: 'Name of the Application in the installer'
-        default: 'Fracktory'
-        required: False
-        type: string
-
-      conan_args:
-        description: '5.6 Conan args: eq.: --require-override'
-        default: ''
-        required: false
-        type: string
-
-      enterprise:
-        description: 'Build Cura as an Enterprise edition'
-        default: false
-        required: true
-        type: boolean
-
-      staging:
-        description: 'Use staging API'
-        default: false
-        required: true
-        type: boolean
-
-      architecture:
-        description: 'Architecture'
-        required: true
-        default: 'X64'
-        type: string
-
-      operating_system:
-        description: 'OS'
-        required: true
-        default: 'Windows'
-        type: string
-
-      conan_internal:
-        required: false
-        default: false
-        type: boolean
-
+    workflow_dispatch:
+      inputs:
+        installer_name:
+          description: 'Name of the .exe and .msi'
+          default: 'Fracktory_setup'
+          required: false
+          type: string
+  
+        app_name:
+          description: 'Name of the Application in the installer'
+          default: 'Fracktory'
+          required: false
+          type: string
+  
+        conan_args:
+          description: '5.6 Conan args: e.g., --require-override'
+          default: ''
+          required: false
+          type: string
+  
+        enterprise:
+          description: 'Build Cura as an Enterprise edition'
+          default: false
+          required: true
+          type: boolean
+  
+        staging:
+          description: 'Use staging API'
+          default: false
+          required: true
+          type: boolean
+  
+        architecture:
+          description: 'Architecture'
+          required: true
+          default: 'X64'
+          type: string
+  
+        operating_system:
+          description: 'OS'
+          required: true
+          default: 'Windows'
+          type: string
+  
+        conan_internal:
+          required: false
+          default: false
+          type: boolean
+  
 permissions:
-  contents: read
+    contents: read
+
 
 env:
   # CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_USER }}
@@ -65,10 +66,8 @@ env:
   STAGING: False
 
 jobs:
-  # cura-installer-create:
-  #   runs-on: ${{ inputs.operating_system }}
-  cura-installer-create_locally:
-    runs-on: Windows
+  cura-installer-create:
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repo
