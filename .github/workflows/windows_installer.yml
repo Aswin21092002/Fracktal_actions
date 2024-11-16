@@ -118,7 +118,7 @@ jobs:
         run: |
           cd ..
           git clone https://github.com/Aswin21092002/Fracktory-5.8.0.git
-          cd Fracktory-5
+          cd Fracktory-5.8.0
           conan create . curaengine/5.8.0@FracktalWorks/stable --build=missing --update
       # - name: Cache Conan downloads
       #   uses: actions/cache@v3
