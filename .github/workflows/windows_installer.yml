@@ -121,14 +121,15 @@ jobs:
           conan profile new default --detect --force
           git clone https://github.com/FracktalWorks/CuraEngine.git
           cd CuraEngine
-          conan create . curaengine/5.8.0@FracktalWorks/stable --build=missing --update
+          conan create . curaengine/5.7.2@FracktalWorks/stable --build=missing --update
+          
 
       # Install and build Cura
       - name: Build Cura
         run: |
           git clone https://github.com/FracktalWorks/Fracktory-5.git
           cd Fracktory-5
-          conan install . --build=missing --update --require-override=curaengine/5.8.0@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
+          conan install . --build=missing --update --require-override=curaengine/5.7.2@FracktalWorks/stable -o cura:devtools=True -g VirtualPythonEnv
           
           
       - name: echo environment variables 
@@ -138,8 +139,8 @@ jobs:
           
       - name: Create the Packages (Powershell)
         run: |
-          conan create . local/test --require-override=curaengine/5.8.0@FracktalWorks/stable --build=missing --update -c tools.build:skip_test=True
-          conan install cura/5.8.0@local/test  ${{ inputs.conan_args }} --require-override=curaengine/5.8.0@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
+          conan create . local/test --require-override=curaengine/5.7.2@FracktalWorks/stable --build=missing --update -c tools.build:skip_test=True
+          conan install cura/5.7.2@local/test  ${{ inputs.conan_args }} --require-override=curaengine/5.7.2@FracktalWorks/stable --build=missing --update -if cura_inst -g VirtualPythonEnv -o cura:enterprise=False -o cura:staging=False -o cura:internal=False -c tools.build:skip_test=True -s curaengine:build_type=RelWithDebInfo -s arcus:build_type=RelWithDebInfo -s clipper:build_type=RelWithDebInfo
       
       - name: Set Environment variables for Cura (Powershell)
         run: |
